@@ -2,9 +2,6 @@ const ToDo = require("../models/ToDo");
 
 exports.create = async (req, res) => {
   const { descricao } = req.body;
-  if (!descricao) {
-    return res.status(400).json({ erro: "Preencha a descrição" });
-  }
   try {
     const novaTarefa = new ToDo({ descricao });
     await novaTarefa.save();
@@ -17,9 +14,6 @@ exports.create = async (req, res) => {
 exports.update = async (req, res) => {
     const { id } = req.params;
     const { descricao } = req.body;
-    if (!descricao) {
-      return res.status(400).json({ erro: "Preencha a nova descrição!" });
-    }
     try {
       const tarefas = await ToDo.findByIdAndUpdate(
         id,
